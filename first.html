@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Handling and Form Input</title>
+</head>
+<body>
+    <button id="myButton">Click me!</button>
+    <p id="output">Hover over or click the button.</p>
+    <form id="myForm">
+        <label for="inputValue">Enter a value:</label>
+        <input type="text" id="inputValue" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Function to handle the click event
+        document.getElementById('myButton').addEventListener('click', function () {
+            document.getElementById('output').textContent = 'Button clicked!';
+        });
+
+        // Function to handle the mouseover event
+        document.getElementById('myButton').addEventListener('mouseover', function () {
+            document.getElementById('output').textContent = 'Mouse over the button.';
+        });
+
+        // Function to handle the mouseout event
+        document.getElementById('myButton').addEventListener('mouseout', function () {
+            document.getElementById('output').textContent = 'Mouse out of the button.';
+        });
+
+        // Function to handle form submission
+        document.getElementById('myForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the form from submitting
+
+            const inputValue = document.getElementById('inputValue').value;
+
+            // Check if the input value is empty
+            if (!inputValue) {
+                alert('Please enter a value.');
+                return;
+            }
+
+            console.log('Input value:', inputValue);
+        });
+    </script>
+</body>
+</html>
