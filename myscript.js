@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-var header =document.querySelector('#main-header');
+//document.addEventListener('DOMContentLoaded', function() {
+/*var header =document.querySelector('#main-header');
 header.style.borderBottom = '4px solid #ccc';
 
 var input=document.querySelector('input');
@@ -78,10 +78,66 @@ console.log(newDiv);
 
 container.insertBefore(newDiv,h1)
 
+*/
+
+/*var form=document.getElementById('addForm');
+var newItem = document.getElementById('items').value;
+
+
+form.addEventListener('submit',addItem);
+form.addEventListener('click',removeitem);
+
+function addItem(e){
+    e.preventDefault();
+
+    var newItem=document.getElementById(item);
+    var li=document.createElement('li');
+    li.className='list-group-item';
+    console.log(li);
+    li.appendChild(document.createTextNode(newItem));
+
+    var deleteBtn=document.createElement('button');
+    deleteBtn.className='btn btn-danger btn-sm float-right delete';
+    deleteBtn.appendChild(document.createTextNode('x'));
+   li.appendChild(deleteBtn); 
+    itemList.appendChild(li);
+
+}
+function removeitem(e){
+    if(e.target.classList.contains('delete'));
+    console.log(1);
+}
 });
 
+*/
 
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('addForm');
+    var itemList = document.getElementById('items');
 
+    form.addEventListener('submit', addItem);
+    form.addEventListener('click', removeItem);
 
+    function addItem(e) {
+        e.preventDefault();
+        var newItemValue = document.getElementById('item').value;
 
+        var li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.appendChild(document.createTextNode(newItemValue));
 
+        var deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+        deleteBtn.appendChild(document.createTextNode('x'));
+        li.appendChild(deleteBtn);
+
+        itemList.appendChild(li);
+    }
+
+    function removeItem(e) {
+        if (e.target.classList.contains('delete')) {
+            var li = e.target.parentElement;
+            itemList.removeChild(li);
+        }
+    }
+});
