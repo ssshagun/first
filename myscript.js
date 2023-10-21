@@ -315,3 +315,8 @@ var itemName=item.firstChild.textContent;
     });
 }
 });
+localStorage.setItem('name','shagun');
+console.log(localStorage.getItem('name'));
+
+sessionStorage.setItem('name','shagun');
+console.log(sessionStorage.getItem('name'));
