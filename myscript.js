@@ -31,7 +31,56 @@ for(var i=0;i<odd.length;i++){
     odd[i].style.backgroundColor='#f4f4f4';
     even[i].style.backgroundColor='#ccc';
 }
+
+
+var itemList =document.querySelector('#items');
+console.log(itemList.parentNode);
+itemList.parentNode.style.backgroundColor='#f4f4f4';
+console.log(itemList.parentNode.parentNode.parentNode);
+
+console.log(itemList.parentNode);
+itemList.parentElement.style.backgroundColor='#f4f4f4';
+console.log(itemList.parentElement.parentElement.parentElement);
+
+console.log(itemList.childNodes);
+
+console.log(itemList.children);
+console.log(itemList.children[1]);
+itemList.children[1].style.backgroundColor='yellow';
+
+console.log(itemList.firstchild);
+console.log(itemList.firstElementchild);
+
+console.log(itemList.lastchild);
+console.log(itemList.lastElementchild);
+itemList.lastElementchild.textcontent="Hello 4";
+
+console.log(itemList.nextsibling);
+
+console.log(itemList.previousSibling);
+
+console.log(itemList.previousElementSibling);
+itemList.previousElementSibling.style.color='green';
+
+var newDiv=document.createElement('div');
+
+newDiv.className='hello';
+
+newDiv.id='hello1';
+newDiv.setAttribute('title','hello div');
+
+var newDivText=document.createTextNode('hello world');
+newDiv.appendChild(newDivText);
+
+var container=document.querySelector('header.container');
+var h1=document.querySelector('header h1');
+console.log(newDiv);
+
+container.insertBefore(newDiv,h1)
+
 });
+
+
 
 
 
