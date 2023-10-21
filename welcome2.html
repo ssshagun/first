@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Storage Example</title>
+</head>
+<body>
+    <form id="userForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="userList">
+        <!-- User details will be displayed here -->
+    </div>
+
+    <script>
+        var userForm = document.getElementById('userForm');
+        var userList = document.getElementById('userList');
+
+        // Listen for the form's submit event
+        userForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+
+            var userDetails = {
+                name: name,
+                email: email,
+                phone: phone
+            };
+
+            // Generate a unique key for this user based on the current timestamp
+            var userKey = 'user_' + Date.now();
+
+            // Convert the userDetails object to a JSON string
+            var userDetailsJSON = JSON.stringify(userDetails);
+
+            // Store the JSON string in local storage with the unique key
+            localStorage.setItem(userKey, userDetailsJSON);
+
+            // Optionally, provide user feedback
+            alert('User details saved to local storage.');
+
+            // Clear the form
+            userForm.reset();
+
+            // Update the user interface to display the new user
+            displayUser(userKey, userDetails);
+        });
+
+        // Function to display a user in the UI
+        function displayUser(userKey, userDetails) {
+            var userDiv = document.createElement('div');
+            userDiv.innerHTML = `
+                <p>Name: <span id="${userKey}-name">${userDetails.name}</span></p>
+                <p>Email: <span id="${userKey}-email">${userDetails.email}</span></p>
+                <p>Phone: <span id="${userKey}-phone">${userDetails.phone}</span></p>
+                <button class="edit-button" data-key="${userKey}">Edit</button>
+                <button class="delete-button" data-key="${userKey}">Delete</button>
+            `;
+
+            userList.appendChild(userDiv);
+        }
+
+        // Event delegation to handle edit and delete button clicks
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-button')) {
+                var keyToDelete = event.target.getAttribute('data-key');
+                localStorage.removeItem(keyToDelete);
+                event.target.parentElement.remove();
+            }
+
+            if (event.target.classList.contains('edit-button')) {
+                var keyToEdit = event.target.getAttribute('data-key');
+                var newName = prompt('Enter new name:', '');
+                var newEmail = prompt('Enter new email:', '');
+                var newPhone = prompt('Enter new phone:', '');
+
+                if (newName !== null) {
+                    document.getElementById(`${keyToEdit}-name`).textContent = newName;
+                }
+                if (newEmail !== null) {
+                    document.getElementById(`${keyToEdit}-email`).textContent = newEmail;
+                }
+                if (newPhone !== null) {
+                    document.getElementById(`${keyToEdit}-phone`).textContent = newPhone;
+                }
+
+                // Update local storage with the edited details
+                var editedDetails = {
+                    name: newName,
+                    email: newEmail,
+                    phone: newPhone
+                };
+                var editedDetailsJSON = JSON.stringify(editedDetails);
+                localStorage.setItem(keyToEdit, editedDetailsJSON);
+            }
+        });
+
+        // Load and display users from local storage on page load
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            var userDetailsJSON = localStorage.getItem(key);
+            var userDetails = JSON.parse(userDetailsJSON);
+            displayUser(key, userDetails);
+        }
+    </script>
+</body>
+</html>
