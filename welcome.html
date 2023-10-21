@@ -8,7 +8,7 @@
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
 
-        <label for="email">Email:</label>
+        <label for "email">Email:</label>
         <input type="email" id="email" name="email" required><br><br>
 
         <label for="phone">Phone:</label>
@@ -17,38 +17,76 @@
         <input type="submit" value="Submit">
     </form>
 
+    <div id="userList">
+        <!-- User details will be displayed here -->
+    </div>
+
     <script>
-        // Get a reference to the form element
         var userForm = document.getElementById('userForm');
+        var userList = document.getElementById('userList');
 
         // Listen for the form's submit event
         userForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting in the default way
+            event.preventDefault();
 
-            // Get user-entered details
             var name = document.getElementById('name').value;
             var email = document.getElementById('email').value;
             var phone = document.getElementById('phone').value;
 
-            // Create a JavaScript object to store the user details
             var userDetails = {
                 name: name,
                 email: email,
                 phone: phone
             };
 
-            // Convert the JavaScript object to a JSON string
+            // Generate a unique key for this user based on the current timestamp
+            var userKey = 'user_' + Date.now();
+
+            // Convert the userDetails object to a JSON string
             var userDetailsJSON = JSON.stringify(userDetails);
 
-            // Store the JSON string in local storage
-            localStorage.setItem('userDetails', userDetailsJSON);
+            // Store the JSON string in local storage with the unique key
+            localStorage.setItem(userKey, userDetailsJSON);
 
             // Optionally, provide user feedback
             alert('User details saved to local storage.');
 
-            // You can also clear the form if needed
+            // Clear the form
             userForm.reset();
+
+            // Update the user interface to display the new user
+            displayUser(userKey, userDetails);
         });
+
+        // Function to display a user in the UI
+        function displayUser(userKey, userDetails) {
+            var userDiv = document.createElement('div');
+            userDiv.innerHTML = `
+                <p>Name: ${userDetails.name}</p>
+                <p>Email: ${userDetails.email}</p>
+                <p>Phone: ${userDetails.phone}</p>
+                <button class="delete-button" data-key="${userKey}">Delete</button>
+            `;
+
+            userList.appendChild(userDiv);
+        }
+
+        // Event delegation to handle delete button clicks
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-button')) {
+                var keyToDelete = event.target.getAttribute('data-key');
+                localStorage.removeItem(keyToDelete);
+                event.target.parentElement.remove();
+            }
+        });
+
+        // Load and display users from local storage on page load
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            var userDetailsJSON = localStorage.getItem(key);
+            var userDetails = JSON.parse(userDetailsJSON);
+            displayUser(key, userDetails);
+        }
     </script>
 </body>
 </html>
