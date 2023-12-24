@@ -1,0 +1,45 @@
+.flex{
+    display:flex;
+}
+.items-center{
+    align-items:center;
+  } 
+  
+  .justify-center{
+    justify-content: center;
+  }
+  .space-between{
+    justify-content: space-between;
+  }
+  
+  .uppercase{
+    text-transform: uppercase;
+  }
+  .semibold{
+    font-weight: bolder;
+  }
+  .mx-2{
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  
+  .flex-wrap{
+    flex-wrap:wrap;
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+}
+  label strong{
+    font-weight:bold;
+  }
+  .big-button {
+    padding: 15px 30px; /* Adjust padding for button size */
+    font-size: 18px; /* Adjust font size */
+    background-color: #ff6600; /* Change background color */
+    color: white; /* Change text color */
+    border: none; /* Remove button border */
+    border-radius: 8px; /* Add border radius for rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
