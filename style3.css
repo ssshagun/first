@@ -28,18 +28,48 @@
   }
   .center {
     display: flex;
+    justify-content: space-between;
+    display: flex;
     justify-content: center;
 }
   label strong{
     font-weight:bold;
   }
-  .big-button {
+  .colorful-button {
     padding: 15px 30px; /* Adjust padding for button size */
     font-size: 18px; /* Adjust font size */
-    background-color: #ff6600; /* Change background color */
+    background-color: #725ceb; /* Change background color */
     color: white; /* Change text color */
     border: none; /* Remove button border */
     border-radius: 8px; /* Add border radius for rounded corners */
     cursor: pointer; /* Change cursor on hover */
     transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+.delete-button {
+  background-color: rgb(255, 38, 0); /* Change the delete button color to red */
+  color: white;
+  border: none;
+  padding: 8px 20px; /* Adjust the padding for button size */
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+/* Adjust styles for responsiveness */
+@media (max-width: 768px) {
+  .button-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .delete-button {
+      margin-top: 10px;
+  }
+}
+.clear-button {
+  background-color: rgb(255, 166, 0); /* Change the delete button color to red */
+  color: white;
+  border: none;
+  padding: 8px 20px; /* Adjust the padding for button size */
+  border-radius: 8px;
+  margin-left: 10px;
 }
