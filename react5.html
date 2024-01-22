@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Add some basic styling for the expenses list */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Style the delete button and update button */
+        .delete-button, .update-button {
+            background-color: #ff6464;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Expense Tracker</title>
+</head>
+<body>
+
+    <h2>Expense Tracker</h2>
+
+    <ul id="expenses-list">
+        <!-- Example expense items -->
+        <li><span>Expense 1:</span> $50 <button class="delete-button" onclick="deleteExpense(this)">Delete Expense</button> <button class="update-button" onclick="updateExpense(this)">Update to $100</button></li>
+        <li><span>Expense 2:</span> $30 <button class="delete-button" onclick="deleteExpense(this)">Delete Expense</button> <button class="update-button" onclick="updateExpense(this)">Update to $100</button></li>
+        <li><span>Expense 3:</span> $20 <button class="delete-button" onclick="deleteExpense(this)">Delete Expense</button> <button class="update-button" onclick="updateExpense(this)">Update to $100</button></li>
+    </ul>
+
+    <script>
+        // Function to delete an expense
+        function deleteExpense(button) {
+            // Get the parent <li> element
+            var listItem = button.parentElement;
+
+            // Remove the <li> element from the expenses list
+            listItem.remove();
+        }
+
+        // Function to update an expense to $100
+        function updateExpense(button) {
+            // Get the parent <li> element
+            var listItem = button.parentElement;
+
+            // Update the expense amount to $100
+            var amountSpan = listItem.querySelector('span');
+            amountSpan.textContent = 'Expense updated to: $100';
+        }
+    </script>
+
+</body>
+</html>
